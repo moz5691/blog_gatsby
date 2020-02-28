@@ -1,0 +1,103 @@
+---
+title: PIP with virtualenvwrapper
+date: 2020-02-28
+tags:
+  - Python
+  - virtualenv
+---
+
+This article is to show how to set up virtualenvwrapper in MacOS.
+
+For Windows setup, refer the following.
+http://timmyreilly.azurewebsites.net/python-pip-virtualenv-installation-on-windows/
+
+Skip the following if you already have Xcode installed.
+
+```sh
+$ sudo xcodebuild -license
+$ sudo xcode-select --install 
+```
+
+Skip the following if you already have Homebrew installed.
+```sh 
+$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+$ brew update
+```
+
+Add the following in **~/.bash_profile** (if use bash) or **~/.zshr** (if use zsh).
+```sh 
+# Homebrew
+export PATH=/usr/local/bin:$PATH
+```
+
+Run source to rerun bash or zsh 
+```sh
+$ source ~/.bash_profile   #for bash
+$ source ~/.zshr           #for zsh
+```
+
+Install Python3,
+```sh 
+$ brew install python3
+```
+
+Check Python3 works,
+```sh 
+$ which python3 
+/usr/local/bin/python3
+```
+
+```sh
+$ python3 --version
+Python 3.7.5
+```
+
+Installing wget is so much useful. Need this to install pip in the next step.
+```sh
+brew install wget
+```
+
+Using 'wget' previously installed, install PIP (a Python Package Manager).
+```sh
+$ wget https://bootstrap.pypa.io/get-pip.py
+$ sudo python3 get-pip.py
+```
+
+Now install Python virtualenv and virtualenvwrapper. And clean up from PIP install.
+```sh
+$ sudo pip3 install virtualenv virtualenvwrapper
+$ sudo rm -rf ~/get-pip.py ~/.cache/pip
+```
+
+Add the following lines in **~/.bash_profile** (if use bash) or **~/.zshr** (if use zsh).
+```sh
+# virtualenv and virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
+```
+
+Run source to make bash or zsh rerun.
+```sh
+$ source ~/.bash_profile #bash
+$ source ~/.zshr         #zsh 
+```
+
+Now create a virtualenv.
+```sh
+$ mkvirtualenv my_env -p python3
+```
+
+Enter the virtual environment.
+```sh
+$ workon my_env
+(my_env) ~ $ which python
+(my_env) ~ $ python --version
+```
+
+```sh
+$ mkvirtualenv <env_name> <options> : Used to “make a virtual environment”
+$ rmvirtualenv <env_name> : Destroys a virtual environment
+$ workon <env_name> : Activates a virtual environment
+$ deactivate : Deactivates the current virtual environment
+```
