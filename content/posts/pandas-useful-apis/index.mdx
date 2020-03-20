@@ -1,0 +1,109 @@
+---
+title: Pandas useful APIs
+date: 2020-03-20
+tags:
+  - Python
+  - Pandas
+  - Data Science
+  - Machine Learning
+---
+
+##### Create Dataframe
+```python
+df = pd.DataFrame(
+    {"Col-1": ["A", "B", "C", "D"],
+     "Col-2": ["E", "F", "G", "H"],
+     "Col-3": ["I", "J", "K", "L"]
+     })
+
+  Col-1 Col-2 Col-3
+0	A     E     I
+1	B     F     J
+2	C     G     K
+3	D     H     L
+```
+
+##### Show certain columns
+```python
+# To show multiple columns with first 5 rows
+df[['Col-1', 'Col-2']].head()
+
+# To show single colum with first 5 rows
+df['Col-1'].head()
+```
+
+##### Show unique values in a column
+```python
+df['Col-1'].unique()
+```
+
+
+
+##### Read from CSV file
+```python
+input_file_path = "./dir/filename"
+df = pd.read_csv(input_file_path, encoding="ISO-8859-1")
+```
+
+##### Write to CSV file
+```python
+# Without index, Includes header
+output_file_path = "./dir/filename"
+df.to_csv("Output/fileOne.csv", index=False, header=True)
+```
+
+##### Read head or tail
+```python
+# Show first 10 rows.  If empty default is 5
+df.head(10)
+
+# Show last 10 rows. If empty default is 5
+df.tail(10)
+```
+
+##### Show columns within Dataframe
+```python
+df.columns
+```
+
+##### Rename Columns
+```python
+# 'inplace=True' is optional. Update is directly copied to 'df' with 'inplace=True'
+df.rename(columns={
+  "old-1":"new-1", 
+  "old-2": "new-2", 
+  "old-3": "new-3", 
+  "old-4": "new-4"}, inplace=True)
+```
+
+##### Reindex Columns
+```python
+# we can sort columns.
+df.reindex(columns=sorted(df.columns))
+
+# we can reorder columns manually.
+df.reindex(columns=['col-3', 'col-2', 'col=1'])
+```
+
+##### Set index name
+```python
+df.set_index("index_name")
+```
+
+##### Grab data from rows and columns
+```python
+# 'loc[]' params are labels of rows and columns 
+df.loc["row-1", "col-1"]  
+df.loc[["row-1", "row-2"], ["col-1", "col-2"]]
+df.loc[:, col-1:col-4] #  select all columns between col-1 and col-4 (inclusive)
+
+# Use with conditions
+df.loc[df['col-1'] > 10, ['col-2', 'col-3']] # select 'col-2' and 'col-3' where 'col-1' value is greater than 10 
+
+# 'iloc[] is integer values of rows and columns 
+df.iloc[1, 2]
+df.iloc[[1,2,3], [2,3,4]]
+df.iloc[:, [1,2,3]]
+df.iloc[:, 2:5]
+```
+
