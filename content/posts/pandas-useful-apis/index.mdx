@@ -22,6 +22,7 @@ df = pd.DataFrame(
 2	C     G     K
 3	D     H     L
 ```
+<br/><br/>
 
 ##### Show certain columns
 ```python
@@ -31,12 +32,13 @@ df[['Col-1', 'Col-2']].head()
 # To show single colum with first 5 rows
 df['Col-1'].head()
 ```
+<br/><br/>
 
 ##### Show unique values in a column
 ```python
 df['Col-1'].unique()
 ```
-
+<br/><br/>
 
 
 ##### Read from CSV file
@@ -44,13 +46,22 @@ df['Col-1'].unique()
 input_file_path = "./dir/filename"
 df = pd.read_csv(input_file_path, encoding="ISO-8859-1")
 ```
+<br/><br/>
 
-##### Write to CSV file
+
+##### Write to file
 ```python
 # Without index, Includes header
 output_file_path = "./dir/filename"
-df.to_csv("Output/fileOne.csv", index=False, header=True)
+
+# Write to CSV
+df.to_csv("output_dir/filename.csv", index=False, header=True)
+
+# Write to Excel
+df.to_excel"output_dir/filename.xlsx", index=False, header=True()
 ```
+<br/><br/>
+
 
 ##### Read head or tail
 ```python
@@ -60,11 +71,15 @@ df.head(10)
 # Show last 10 rows. If empty default is 5
 df.tail(10)
 ```
+<br/><br/>
+
 
 ##### Show columns within Dataframe
 ```python
 df.columns
 ```
+<br/><br/>
+
 
 ##### Rename Columns
 ```python
@@ -75,6 +90,8 @@ df.rename(columns={
   "old-3": "new-3", 
   "old-4": "new-4"}, inplace=True)
 ```
+<br/><br/>
+
 
 ##### Reindex Columns
 ```python
@@ -84,11 +101,15 @@ df.reindex(columns=sorted(df.columns))
 # we can reorder columns manually.
 df.reindex(columns=['col-3', 'col-2', 'col=1'])
 ```
+<br/><br/>
+
 
 ##### Set index name
 ```python
 df.set_index("index_name")
 ```
+<br/><br/>
+
 
 ##### Grab data from rows and columns
 ```python
@@ -106,4 +127,81 @@ df.iloc[[1,2,3], [2,3,4]]
 df.iloc[:, [1,2,3]]
 df.iloc[:, 2:5]
 ```
+<br/><br/>
+
+
+##### Want to find the number of data in each columns, then, drop rows with missing data
+```python
+df.count()
+
+A     1743
+B     1743
+C     1743
+D     1740  # <-- 3 less data here
+
+df = df.dropna(how='any')  # drop those 3 rows
+
+df.count()
+
+A     1740
+B     1740
+C     1740
+D     1740 
+```
+<br/><br/>
+
+
+##### Convert the datatype to nemeric
+```python
+# convert datatype of 'Col-3' to numeric
+df['Col-3'] = pd.to_numeric(df['Col-3'])
+```
+<br/><br/>
+
+
+##### Check data type of a column 
+```python
+df['Col-1'].dtype
+
+dtype('float64')
+```
+<br/><br/>
+
+
+##### Overview of a column with value distribution
+```python
+df['Col-1'].value_counts()
+
+Google                                6
+Not Employed                          4
+Unemployed                            4
+Bank Of America                       3
+University of California              3
+Social Security Administration        3
+Davis Polk & Wardwell                 2
+```
+<br/><br/>
+
+
+##### Want to replace values in a column with new ones 
+```python 
+# replace 'Not Employed' with 'Not-Employeed'
+df['Col-1] = df['Col-1].replace({'Not Employed': 'Not-Employeed'})
+
+# run value_counts() again to confirm the chain.
+df['Col-1].value_counts()
+```
+<br/><br/>
+
+
+##### Sorting 
+```python
+df.sort_values(by='Col-1', ascending=False)
+
+# reset index, index is out of order after Sorting
+df.reset_index(drop=True, inplace=True)
+```
+<br/><br/>
+
+
 
