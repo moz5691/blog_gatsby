@@ -154,8 +154,9 @@ D     1740
 ##### Convert the datatype to nemeric
 ```python
 # convert datatype of 'Col-3' to numeric
-df['Col-3'] = pd.to_numeric(df['Col-3'])
+df['Col-3'] = pd.to_numeric(df['Col-3'], errors='coerce')
 ```
+* By setting *errors='coerce'*, it will transform the non
 <br/><br/>
 
 
@@ -197,11 +198,40 @@ df['Col-1].value_counts()
 ##### Sorting 
 ```python
 df.sort_values(by='Col-1', ascending=False)
+df.sort_values(by=['Col-1', 'Col-2'], ascending=[False, False])
 
 # reset index, index is out of order after Sorting
 df.reset_index(drop=True, inplace=True)
 ```
 <br/><br/>
+
+##### Convert String to Floats
+* If all the numbers are String format but there is no none-numeric string (e.g. 300dollar)
+
+```python
+df['Col-1] = df['Col=1'].astype(float)
+# check type
+df.dtypes
+```
+
+* If numeric and non-numeric values are in a column
+
+```python
+df['Col-1'] = pd.to_numeric(df['Col-1], errors='coerce')
+df = df.replace(np.nan, 0, regex=True)
+```
+* By setting *'errors='coerce'*, transform non-numeric values into NaN.
+* Using 'repalce()' convert *NaN* into 0 if applicable.
+
+##### Format number with map
+
+```python
+df['Col-1].map("${:.2f}".format)
+df['Col-1'].map("{:,}".format)
+df['Col-1'].map("{:.2f}.format)
+```
+
+
 
 
 

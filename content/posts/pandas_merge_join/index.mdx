@@ -8,6 +8,8 @@ tags:
   - Machine Learning
 ---
 
+<link href="./css/style.css" rel="stylesheet"></link>
+
 ##### Data set up
 - df_a, df_b, df_n are raw data set to use.
 ```python
@@ -39,6 +41,7 @@ df_n = pd.DataFrame(raw_data, columns = ['subject_id','test_id'])
 |2	 |Ali	         |Allen	        |3          |
 |3	 |Aoni	       |Alice	        |4          | 
 |4	 |Atiches	     |Ayoung	      |5          |
+
 
 *df_b*
 
@@ -73,6 +76,7 @@ df_n = pd.DataFrame(raw_data, columns = ['subject_id','test_id'])
 df_new = pd.concat([df_a, df_b])
 df_new
 ```
+<br/>
 
 |idx |last_name    |first_name    |subject_id  |
 |----|-------------|--------------|------------|
@@ -95,6 +99,7 @@ df_new
 ```python
 pd.concat([df_a, df_b], axis=1)
 ```
+<br/>
 
 |idx |last_name	  |first_name  	|subject_id	  |last_name   |first_name   |subject_id |
 |----|------------|-------------|-------------|------------|-------------|-----------| 
@@ -110,6 +115,7 @@ pd.concat([df_a, df_b], axis=1)
 ```python 
 pd.merge(df_new, df_n, on='subject_id')
 ```
+<br/>
 
 |idx |last_name   |first_name   |subject_id   |test_id |
 |----|------------|-------------|-------------|--------|
@@ -129,6 +135,7 @@ pd.merge(df_new, df_n, on='subject_id')
 ```python
 pd.merge(df_new, df_n, left_on='subject_id', right_on='subject_id')
 ```
+<br/>
 
 |idx |last_name  |first_name	|subject_id	 |test_id|
 |----|-----------|------------|------------|-------|
@@ -149,6 +156,7 @@ pd.merge(df_new, df_n, left_on='subject_id', right_on='subject_id')
 ```python
 pd.merge(df_a, df_b, on='subject_id', how='outer')
 ```
+<br/>
 
 |idx |last_name_x	 |first_name_x	|subject_id	 |last_name_y	 |first_name_y|
 |----|-------------|--------------|------------|-------------|------------|
@@ -168,6 +176,7 @@ pd.merge(df_a, df_b, on='subject_id', how='outer')
 ```python
 pd.merge(df_a, df_b, on='subject_id', how='inner')
 ```
+<br/>
 
 |idx  |last_name_x	|first_name_x	 |subject_id	 |last_name_y	 |first_name_y|
 |-----|-------------|--------------|-------------|-------------|------------|
@@ -180,6 +189,7 @@ pd.merge(df_a, df_b, on='subject_id', how='inner')
 ```python
 pd.merge(df_a, df_b, on='subject_id', how='right')
 ```
+<br/>
 
 |idx   |last_name_x	  |first_name_x	 |subject_id	|last_name_y	|first_name_y|
 |------|--------------|--------------|------------|-------------|------------|
@@ -195,6 +205,7 @@ pd.merge(df_a, df_b, on='subject_id', how='right')
 ```python 
 pd.merge(df_a, df_b, on='subject_id', how='left')
 ```
+<br/>
 
 |idx | last_name_x	|first_name_x	  |subject_id	  |last_name_y	|first_name_y|
 |----|--------------|---------------|-------------|-------------|------------|
@@ -210,6 +221,7 @@ pd.merge(df_a, df_b, on='subject_id', how='left')
 ```python
 pd.merge(df_a, df_b, on='subject_id', how='left', suffixes=('_left', '_right'))
 ```
+<br/>
 
 |idx  |last_name_left	  |first_name_left	|subject_id	  |last_name_right	|first_name_right |
 |-----|-----------------|-----------------|-------------|-----------------|-----------------|
@@ -225,6 +237,7 @@ pd.merge(df_a, df_b, on='subject_id', how='left', suffixes=('_left', '_right'))
 ```python
 pd.merge(df_a, df_b, right_index=True, left_index=True)
 ```
+<br/>
 
 |idx	|last_name_x	 |first_name_x	 |subject_id_x	|last_name_y	|first_name_y	 |subject_id_y|
 |-----|--------------|---------------|--------------|-------------|--------------|------------|

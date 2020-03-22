@@ -1,0 +1,52 @@
+---
+title: Pandas cut() method, bin values into intervals
+date: 2020-03-21
+tags:
+  - Python
+  - Pandas
+  - Data Science
+  - Machine Learning
+---
+
+As you have numerical data on very large scales, you could bin the values into groups.
+This helps perform descriptive statistics by groups as generaliing of patterns in the given data.
+
+##### First create random age data
+```python 
+df_ages = pd.DataFrame({'age': np.random.randint(21, 51, 8)})
+df_ages
+
+age
+0	45
+1	47
+2	37
+3	41
+4	29
+5	30
+6	30
+7	49
+```
+##### Create new columns of "age_bins"
+* Create a new column "age_bins" that sets the *x* argument ot the *age* column in *df_ages* and 
+sets the *bins* argument to a list of bin edge values.
+* The left bin edge will be exclusive and the right bin edge will be inclusive.
+
+```python
+df_ages['age_bins'] = pd.cut(x=df_ages['age'], bins=[20, 29, 39, 49])
+df_ages['age_by_decade'] = pd.cut(x=df_ages['age'], bins=[20, 29, 39, 49], labels=['20s', '30s', '40s'])
+
+df_ages
+
+age	age_bins	age_by_decade
+0	45	(39, 49]	40s
+1	47	(39, 49]	40s
+2	37	(29, 39]	30s
+3	41	(39, 49]	40s
+4	29	(20, 29]	20s
+5	30	(29, 39]	30s
+6	30	(29, 39]	30s
+7	49	(39, 49]	40s
+```
+
+
+
