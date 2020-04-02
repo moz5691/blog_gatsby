@@ -1,0 +1,57 @@
+---
+title: Postgres DB with docker-compose
+date: 2020-04-02
+tags:
+  - Docker
+  - Postgres
+  - Database
+  - Docker Compose
+---
+
+##### Postgres DB with Docker Compose
+* Create 'docker-compose.yml' 
+
+```sh
+version: '3.7'
+services:
+  pg:
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - '54320:5432'
+    volumes:
+      - ./postgres:/var/lib/postgresql/data/pgdata
+
+volumes:
+  postgres:
+```
+<br/>
+
+* Run 'docker-compose' 
+```sh
+$ docker-compose up -d
+```
+<br/>
+
+* As Postgres runs in Docker container, we don't have an easy access to PG clients. PG clients such as "pg_restore", "pg_dump" are frequently used. 
+* The following is an easy way to install PG clients.
+
+```sh
+$ brew install libpq 
+$ brew link --force libpq
+```
+<br/>
+
+* I use "DBeaver.app" as PG client GUI. You need to specify where PG native clients are located.
+```sh
+$ which psql
+/usr/local/opt/libpq/bin
+```
+<br/>
+* command + shift + G, Paste the path in there such as
+```sh
+/usr/local/opt/libpq/bin
+```

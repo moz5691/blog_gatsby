@@ -112,6 +112,8 @@ df.set_index("index_name")
 
 
 ##### Grab data from rows and columns
+* DataFrame.iloc: Purly integer-location based indexer for seletion by position
+* DataFrame.loc: Purley label-location based for seletion by label
 ```python
 # 'loc[]' params are labels of rows and columns 
 df.loc["row-1", "col-1"]  
@@ -168,6 +170,15 @@ dtype('float64')
 ```
 <br/><br/>
 
+##### Check type
+```python 
+type(df['Col-1])
+
+pandas.core.series.Series
+```
+<br/><br/>
+
+
 
 ##### Overview of a column with value distribution
 ```python
@@ -210,6 +221,10 @@ df.reset_index(drop=True, inplace=True)
 
 ```python
 df['Col-1] = df['Col=1'].astype(float)
+
+# or if you have string like $100.00
+df['Col-1'].replace('$','').astype(float)
+
 # check type
 df.dtypes
 ```
