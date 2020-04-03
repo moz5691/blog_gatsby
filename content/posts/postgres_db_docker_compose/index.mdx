@@ -36,8 +36,8 @@ $ docker-compose up -d
 ```
 <br/>
 
-* As Postgres runs in Docker container, we don't have an easy access to PG clients. PG clients such as "pg_restore", "pg_dump" are frequently used. 
-* The following is an easy way to install PG clients.
+* As Postgres runs in Docker container, we don't have an easy access to PG client. PG client includes executables such as "pg_restore", "pg_dump", "psql". 
+* The following is an easy way to install PG client in Mac.
 
 ```sh
 $ brew install libpq 
@@ -51,7 +51,16 @@ $ which psql
 /usr/local/opt/libpq/bin
 ```
 <br/>
-* command + shift + G, Paste the path in there such as
+
+* Using Mac, Finder shows default home directory. To find absolute path directories, prese 'command + shift + G'. 
+* Paste the path in there such as:
+
 ```sh
 /usr/local/opt/libpq/bin
 ```
+
+<br/>
+
+* Using Windows to install libpq, refer the following link. 
+<br/> 
+https://github.com/jtv/libpqxx/blob/master/INSTALL-Windows.md
